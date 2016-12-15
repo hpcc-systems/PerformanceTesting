@@ -1,2 +1,0 @@
-# PerformanceTesting
-Performance testing bundle
