@@ -10,7 +10,7 @@
 //version checkCrc=false,hintHeapFlags=0x80,timeActivities=true
 //version checkCrc=true,hintHeapFlags=0x00,timeActivities=true
 //version checkCrc=false,hintHeapFlags=0x00,timeActivities=true
-#option ('optimizeLevel',3)
+#option ('optimizeLevel',3);
 
 import ^ as root;
 import $ as suite;
