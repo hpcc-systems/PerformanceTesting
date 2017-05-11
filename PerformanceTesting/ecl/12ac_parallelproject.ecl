@@ -1,116 +1,51 @@
 //class=memory
 //class=quick
 //class=create
+//class=parallel
 
-//The first set of versions are used to create a vaguely representative set of timings that can be compared between versions
+//nohthor - parallel queries not supported in hthor
 
-//version hintNumStrands=1,hintBlockSize=500,hintProjectWork=4,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
+//DATASET->PROJECT->COUNT
 
-//version hintNumStrands=1,hintBlockSize=500,hintProjectWork=64,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
+//- Single stranded performance - how does it scale with the the amount of work that needs to be done?
+//version hintNumStrands=1,hintProjectWork=0,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
+//version hintNumStrands=1,hintProjectWork=4,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
+//version hintNumStrands=1,hintProjectWork=16,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
+//version hintNumStrands=1,hintProjectWork=64,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
+//version hintNumStrands=1,hintProjectWork=256,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
 
-//version hintNumStrands=4,hintBlockSize=500,hintProjectWork=4,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
+//- A reasonable number of strands (8), and reasonable work - how do the different versions of executing in parallel compare?
+//version hintNumStrands=8,hintProjectWork=16,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
+//version hintNumStrands=8,hintProjectWork=16,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=true
+//version hintNumStrands=8,hintProjectWork=16,hintParallelSource=true,hintParallelCount=false,hintIsOrdered=false
+//version hintNumStrands=8,hintProjectWork=16,hintParallelSource=true,hintParallelCount=false,hintIsOrdered=true
+//version hintNumStrands=8,hintProjectWork=16,hintParallelSource=false,hintParallelCount=true,hintIsOrdered=false
+//version hintNumStrands=8,hintProjectWork=16,hintParallelSource=false,hintParallelCount=true,hintIsOrdered=true
+//version hintNumStrands=8,hintProjectWork=16,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=false
+//version hintNumStrands=8,hintProjectWork=16,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
 
-//version hintNumStrands=4,hintBlockSize=500,hintProjectWork=64,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
+//The version that is executed completely in parallel - how does it improve with the number of strands?  
+//version hintNumStrands=4,hintProjectWork=16,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
+//version hintNumStrands=8,hintProjectWork=16,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
+//version hintNumStrands=16,hintProjectWork=16,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
+//version hintNumStrands=32,hintProjectWork=16,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
+//version hintNumStrands=64,hintProjectWork=16,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
+//version hintNumStrands=128,hintProjectWork=16,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
 
-//version hintNumStrands=4,hintBlockSize=500,hintProjectWork=4,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
-
-//version hintNumStrands=16,hintBlockSize=500,hintProjectWork=64,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
-
-//version hintNumStrands=16,hintBlockSize=500,hintProjectWork=4,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
-
-//version hintNumStrands=16,hintBlockSize=500,hintProjectWork=64,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
-
-//version hintNumStrands=16,hintBlockSize=500,hintProjectWork=4,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
-
-//version hintNumStrands=16,hintBlockSize=500,hintProjectWork=64,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
-
-//The following tests are primarily here to compare the different varieties within a version
-
-//Single stranded - base line comparison
-//xversion hintNumStrands=1,hintBlockSize=500,hintProjectWork=0,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=1,hintBlockSize=500,hintProjectWork=4,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=1,hintBlockSize=500,hintProjectWork=16,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=1,hintBlockSize=500,hintProjectWork=64,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=1,hintBlockSize=500,hintProjectWork=256,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
-
-//Stranded - work=0, all combinations of source project and aggregate executed in parallel
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=0,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=0,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=true
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=0,hintParallelSource=true,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=0,hintParallelSource=true,hintParallelCount=false,hintIsOrdered=true
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=0,hintParallelSource=false,hintParallelCount=true,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=0,hintParallelSource=false,hintParallelCount=true,hintIsOrdered=true
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=0,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=0,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
-
-//Stranded - work=4, all combinations of source project and aggregate executed in parallel
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=4,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=4,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=true
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=4,hintParallelSource=true,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=4,hintParallelSource=true,hintParallelCount=false,hintIsOrdered=true
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=4,hintParallelSource=false,hintParallelCount=true,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=4,hintParallelSource=false,hintParallelCount=true,hintIsOrdered=true
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=4,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=4,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
-
-//Stranded - work=16, all combinations of source project and aggregate executed in parallel
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=16,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=16,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=true
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=16,hintParallelSource=true,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=16,hintParallelSource=true,hintParallelCount=false,hintIsOrdered=true
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=16,hintParallelSource=false,hintParallelCount=true,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=16,hintParallelSource=false,hintParallelCount=true,hintIsOrdered=true
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=16,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=16,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
-
-//Stranded - work=64, all combinations of source project and aggregate executed in parallel
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=64,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=64,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=true
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=64,hintParallelSource=true,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=64,hintParallelSource=true,hintParallelCount=false,hintIsOrdered=true
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=64,hintParallelSource=false,hintParallelCount=true,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=64,hintParallelSource=false,hintParallelCount=true,hintIsOrdered=true
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=64,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=64,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
-
-//Stranded - work=256, all combinations of source project and aggregate executed in parallel
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=256,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=256,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=true
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=256,hintParallelSource=true,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=256,hintParallelSource=true,hintParallelCount=false,hintIsOrdered=true
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=256,hintParallelSource=false,hintParallelCount=true,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=256,hintParallelSource=false,hintParallelCount=true,hintIsOrdered=true
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=256,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=false
-//xversion hintNumStrands=4,hintBlockSize=500,hintProjectWork=256,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
-
-//Different amounts of work for large numbers of strands
-//Stranded - work=4, all combinations of source project and aggregate executed in parallel
-//xversion hintNumStrands=16,hintBlockSize=500,hintProjectWork=4,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=16,hintBlockSize=500,hintProjectWork=4,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=true
-//xversion hintNumStrands=16,hintBlockSize=500,hintProjectWork=4,hintParallelSource=true,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=16,hintBlockSize=500,hintProjectWork=4,hintParallelSource=true,hintParallelCount=false,hintIsOrdered=true
-//xversion hintNumStrands=16,hintBlockSize=500,hintProjectWork=4,hintParallelSource=false,hintParallelCount=true,hintIsOrdered=false
-//xversion hintNumStrands=16,hintBlockSize=500,hintProjectWork=4,hintParallelSource=false,hintParallelCount=true,hintIsOrdered=true
-//xversion hintNumStrands=16,hintBlockSize=500,hintProjectWork=4,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=false
-//xversion hintNumStrands=16,hintBlockSize=500,hintProjectWork=4,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
-
-//Stranded - work=256, all combinations of source project and aggregate executed in parallel
-//xversion hintNumStrands=16,hintBlockSize=500,hintProjectWork=256,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=16,hintBlockSize=500,hintProjectWork=256,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=true
-//xversion hintNumStrands=16,hintBlockSize=500,hintProjectWork=256,hintParallelSource=true,hintParallelCount=false,hintIsOrdered=false
-//xversion hintNumStrands=16,hintBlockSize=500,hintProjectWork=256,hintParallelSource=true,hintParallelCount=false,hintIsOrdered=true
-//xversion hintNumStrands=16,hintBlockSize=500,hintProjectWork=256,hintParallelSource=false,hintParallelCount=true,hintIsOrdered=false
-//xversion hintNumStrands=16,hintBlockSize=500,hintProjectWork=256,hintParallelSource=false,hintParallelCount=true,hintIsOrdered=true
-//xversion hintNumStrands=16,hintBlockSize=500,hintProjectWork=256,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=false
-//xversion hintNumStrands=16,hintBlockSize=500,hintProjectWork=256,hintParallelSource=true,hintParallelCount=true,hintIsOrdered=true
-
+//The version that has contention before and after the project   
+//version hintNumStrands=4,hintProjectWork=16,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=true
+//version hintNumStrands=8,hintProjectWork=16,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=true
+//version hintNumStrands=16,hintProjectWork=16,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=true
+//version hintNumStrands=32,hintProjectWork=16,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=true
+//version hintNumStrands=64,hintProjectWork=16,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=true
+//version hintNumStrands=128,hintProjectWork=16,hintParallelSource=false,hintParallelCount=false,hintIsOrdered=true
+  
 import ^ as root;
 import $ as suite;
 import suite.perform.config;
 import suite.perform.files;
 
 hintNumStrands := #IFDEFINED(root.hintNumStrands, 16);
-hintBlockSize := #IFDEFINED(root.hintBlockSize, 500);
 hintIsOrdered := #IFDEFINED(root.hintIsOrdered, false);
 projectWork := #IFDEFINED(root.hintProjectWork, 4);
 parallelSource := #IFDEFINED(root.hintParallelSource, false);
@@ -139,7 +74,7 @@ r2 t(r1 l) := TRANSFORM, SKIP(l.id % 5 = 6)
     SELF.val := performWork(l.id, projectWork);
 END;
 
-p := PROJECT(NOFOLD(ds), t(LEFT), PARALLEL(hintNumStrands),ORDERED(hintIsOrdered),HINT(strandBlockSize(hintBlockSize)));
+p := PROJECT(NOFOLD(ds), t(LEFT), PARALLEL(hintNumStrands),ORDERED(hintIsOrdered));
 
 s := IF(hintIsOrdered, SORTED(NOFOLD(p), id, ASSERT), p);
 

@@ -1,7 +1,12 @@
 //class=memory
 //class=quick
 //class=create
+//class=parallel
+
+//nohthor - parallel join helpers not currently implemented in hthor
 //noroxie - parallel join helpers not currently implemented in roxie
+
+//Test the speed of parallel joins
 
 //version hintWriteWork=0,hintReadWork=0,hintNewHelper=false
 //version hintWriteWork=16,hintReadWork=0,hintNewHelper=false

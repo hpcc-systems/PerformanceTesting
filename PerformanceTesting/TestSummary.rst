@@ -361,6 +361,7 @@ TBD:01h - Limits on index reads [class: indexread]
 | 12ad - parallel inline -> count
 | 12ae - inline -> parallel disk write (uncompressed)
 | 12af - inline -> parallel disk write (compressed)
+| 12ag - inline -> group -> aggregate  test speed of chains of grouped activities
 | 12ba - inline -> local sort -> count  [ needs more work ]
 | 12bb - inline -> local sort -> parallel output
 
