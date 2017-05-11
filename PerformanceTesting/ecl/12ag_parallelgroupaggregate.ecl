@@ -1,6 +1,11 @@
 //class=memory
 //class=quick
 //class=create
+//class=parallel
+
+//nohthor - parallel queries not supported in hthor
+
+//Test the speed of parallel grouped aggregation
 
 //Single stranded - base line comparison
 //version hintNumStrands=1,hintBlockSize=500,hintProjectWork=0,hintIsOrdered=false
@@ -22,6 +27,10 @@
 //version hintNumStrands=16,hintBlockSize=500,hintProjectWork=64,hintIsOrdered=false
 //version hintNumStrands=16,hintBlockSize=500,hintProjectWork=256,hintIsOrdered=false
 
+//version hintNumStrands=32,hintBlockSize=500,hintProjectWork=16,hintIsOrdered=false
+//version hintNumStrands=32,hintBlockSize=500,hintProjectWork=64,hintIsOrdered=false
+//version hintNumStrands=32,hintBlockSize=500,hintProjectWork=256,hintIsOrdered=false
+
 import ^ as root;
 import $ as suite;
 import suite.perform.config;
@@ -34,7 +43,7 @@ projectWork := #IFDEFINED(root.hintProjectWork, 16);
 parallelSource := #IFDEFINED(root.hintParallelSource, false);
 parallelCount := #IFDEFINED(root.hintParallelCount, true);
 
-numRecords := 200000*32;
+numRecords := 200000*64;
 
 unsigned8 performWork(unsigned8 value, unsigned iter) := BEGINC++
     #option pure
@@ -50,7 +59,7 @@ r1 createSimple(unsigned8 c) := TRANSFORM
     SELF.id := c;
 END;
 
-ds := DATASET(numRecords, createSimple(COUNTER), LOCAL);
+ds := DATASET(numRecords, createSimple(COUNTER), LOCAL, PARALLEL(hintNumStrands));
 
 whichGroup(unsigned i) := MAP(i<2 => 1,
                               i<6 => 2,

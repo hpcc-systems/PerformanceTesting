@@ -1,6 +1,13 @@
 //class=disk
 //class=sort
+//class=parallel
 
+//test disk write speed following a local sort.
+
+//Disable until some of the engines support this
+//nohthor
+//nothor
+//noroxie
 
 //version hintNumStrands=0
 //version hintNumStrands=2

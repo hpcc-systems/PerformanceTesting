@@ -1,5 +1,10 @@
 //class=memory
 //class=sort
+//class=parallel
+
+//nohthor - parallel queries not supported in hthor
+//nothor
+//noroxie - test requires more work, disable for the moment
 
 //xversion algo='quicksort'
 //xversion algo='parquicksort'
@@ -30,4 +35,4 @@ hintBlockSize := #IFDEFINED(root.hintBlockSize, 512);
 ds := files.generateSimple();
 
 s1 := sort(ds, id3, local, stable(algo));
-output(COUNT(NOFOLD(s1)) = config.simpleRecordCount);
+output(COUNT(NOFOLD(s1)) - config.simpleRecordCount) = 0);

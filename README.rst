@@ -19,8 +19,9 @@ This folder contains a set of ECL queries that are designed to test the performa
 and allow changes in speed and memory usage to be tracked over time.
 
 To run the regression suite, select the directory of the regression suite engine, and
-enter the following command:
+enter the following commands:
 
+./ecl-test --timeout -1 --suiteDir <location-of-the-bundle-directory> setup -t=<cluster>
 ./ecl-test --timeout -1 --suiteDir <location-of-the-bundle-directory> run -t=<cluster>
 
 Each of the tests in the regression suite is assigned to one or more classes.  This allows subsets of the

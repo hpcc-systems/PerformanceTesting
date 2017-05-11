@@ -1,6 +1,12 @@
 //class=memory
 //class=quick
 //class=create
+//class=parallel
+
+//nohthor - parallel queries not supported in hthor
+
+//Test to see how the performance of parallel inlinetable->project->count depends on the work that is being done and on the number of strands
+//Really test 12ac_parallelproject supersedes this test  
 
 //version hintNumStrands=1,hintBlockSize=512,hintWriteWork=4,hintReadWork=0,hintIsOrdered=true
 //version hintNumStrands=6,hintBlockSize=512,hintWriteWork=4,hintReadWork=0,hintIsOrdered=true
@@ -14,78 +20,6 @@
 //version hintNumStrands=6,hintBlockSize=512,hintWriteWork=64,hintReadWork=0,hintIsOrdered=true
 //version hintNumStrands=6,hintBlockSize=512,hintWriteWork=64,hintReadWork=0,hintIsOrdered=false
 
-//xversion hintNumStrands=8,hintBlockSize=8096,hintWriteWork=4,hintReadWork=0,hintIsOrdered=true
-//xversion hintNumStrands=8,hintBlockSize=8096,hintWriteWork=4,hintReadWork=0,hintIsOrdered=false
-
-//xversion hintNumStrands=1,hintBlockSize=1,hintWriteWork=1
-//xversion hintNumStrands=1,hintBlockSize=1,hintWriteWork=4
-//xversion hintNumStrands=1,hintBlockSize=1,hintWriteWork=8
-//xversion hintNumStrands=1,hintBlockSize=1,hintWriteWork=16
-//xversion hintNumStrands=1,hintBlockSize=1,hintWriteWork=32
-
-//xversion hintNumStrands=8,hintBlockSize=1,hintWriteWork=32,hintReadWork=0
-
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=1,hintReadWork=0
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=4,hintReadWork=0
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=8,hintReadWork=0
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=16,hintReadWork=0
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=32,hintReadWork=0
-
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=1,hintReadWork=1
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=4,hintReadWork=1
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=8,hintReadWork=1
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=16,hintReadWork=1
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=32,hintReadWork=1
-
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=1,hintReadWork=8
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=4,hintReadWork=8
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=8,hintReadWork=8
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=16,hintReadWork=8
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=32,hintReadWork=8
-
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=1,hintReadWork=32
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=4,hintReadWork=32
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=8,hintReadWork=32
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=16,hintReadWork=32
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=32,hintReadWork=32
-
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=1,hintReadWork=128
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=4,hintReadWork=128
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=8,hintReadWork=128
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=16,hintReadWork=128
-//xversion hintNumStrands=8,hintBlockSize=512,hintWriteWork=32,hintReadWork=128
-
-//xversion hintNumStrands=1,hintBlockSize=1
-
-//xversion hintNumStrands=2,hintBlockSize=1
-//xversion hintNumStrands=4,hintBlockSize=1
-//xversion hintNumStrands=6,hintBlockSize=1
-//xversion hintNumStrands=8,hintBlockSize=1
-//xversion hintNumStrands=16,hintBlockSize=1
-
-//xversion hintNumStrands=2,hintBlockSize=128
-//xversion hintNumStrands=4,hintBlockSize=128
-//xversion hintNumStrands=6,hintBlockSize=128
-//xversion hintNumStrands=8,hintBlockSize=128
-//xversion hintNumStrands=16,hintBlockSize=128
-
-//xversion hintNumStrands=2,hintBlockSize=512
-//xversion hintNumStrands=4,hintBlockSize=512
-//xversion hintNumStrands=6,hintBlockSize=512
-//xversion hintNumStrands=8,hintBlockSize=512
-//xversion hintNumStrands=16,hintBlockSize=512
-
-//xversion hintNumStrands=2,hintBlockSize=2048
-//xversion hintNumStrands=4,hintBlockSize=2048
-//xversion hintNumStrands=6,hintBlockSize=2048
-//xversion hintNumStrands=8,hintBlockSize=2048
-//xversion hintNumStrands=16,hintBlockSize=2048
-
-//xversion hintNumStrands=2,hintBlockSize=8096
-//xversion hintNumStrands=4,hintBlockSize=8096
-//xversion hintNumStrands=6,hintBlockSize=8096
-//xversion hintNumStrands=8,hintBlockSize=8096
-//xversion hintNumStrands=16,hintBlockSize=8096
 
 import ^ as root;
 import $ as suite;
@@ -116,4 +50,4 @@ ds  := DATASET(numRecords, createSimple(COUNTER), LOCAL, PARALLEL(hintNumStrands
 readDs := NOFOLD(ds)(performWork(id, readWork) * NOFOLD(0) = 0);
 cnt := COUNT(NOFOLD(readDs));
 
-OUTPUT(cnt = numRecords * CLUSTERSIZE);
+OUTPUT(cnt - numRecords * CLUSTERSIZE = 0);
