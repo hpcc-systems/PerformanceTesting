@@ -1,6 +1,8 @@
 //class=index
 //class=keyedjoin
 
+#onwarning (4522, ignore);
+
 import $ as suite;
 import suite.perform.config;
 import suite.perform.format;
