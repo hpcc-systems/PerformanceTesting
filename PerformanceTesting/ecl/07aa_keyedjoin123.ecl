@@ -10,7 +10,7 @@ import suite.perform.files;
 import suite.perform.util;
 
 unsigned scale := IF(config.smokeTest, 0x10000, 0x100);
-ds := files.generateSimpleScaled(0, scale);
+ds := DATASET(config.simpleRecordCount DIV scale, format.createSimple(COUNTER * scale), DISTRIBUTED);
 
 j := JOIN(ds, files.manyIndex123,
             RIGHT.id1a = util.byte(LEFT.id1, 0) AND 
