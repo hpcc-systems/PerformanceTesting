@@ -8,7 +8,7 @@ import suite.perform.files;
 import suite.perform.util;
 
 unsigned scale := IF(config.smokeTest, 0x10000, 0x100);
-ds := files.generateSimpleScaled(0, scale);
+ds := DATASET(config.simpleRecordCount DIV scale, format.createSimple(1 + ((COUNTER-1) * scale)), DISTRIBUTED);
 
 j := JOIN(ds, files.manyIndex123,
             RIGHT.id1a = util.byte(LEFT.id1, 0) AND 
@@ -21,4 +21,5 @@ j := JOIN(ds, files.manyIndex123,
             TRANSFORM(LEFT), LIMIT(255, TRANSFORM(format.simpleRec, SELF := []))); 
 cnt := COUNT(NOFOLD(j));
 
-OUTPUT(cnt = 255*255 + (config.simpleRecordCount DIV scale) - 255);
+// 255 matches from 1st record, the rest return 1 limit transform rec. each
+OUTPUT(cnt = 255 + (config.simpleRecordCount DIV scale)-1);
