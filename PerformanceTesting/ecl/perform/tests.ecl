@@ -9,12 +9,15 @@ EXPORT tests := MODULE
         return value;
     ENDC++;
     
-    EXPORT join(unsigned expectedMatches) := MODULE
-        SHARED dsLeft := files.generateSimpleScaled(0, expectedMatches);
-        SHARED dsRight := files.generateSimpleScaled(NOFOLD(0), expectedMatches);
+    EXPORT join(unsigned expectedMatches, unsigned scale=1) := MODULE
+        SHARED dsLeft := files.generateSimpleScaled(0, expectedMatches * scale);
+        SHARED dsRight := files.generateSimpleScaled(NOFOLD(0), expectedMatches * scale);
 
-        SHARED numInputRows := config.simpleRecordCount DIV expectedMatches;
-        EXPORT numExpected := (numInputRows DIV expectedMatches) * expectedMatches * expectedMatches + (numInputRows % expectedMatches) * (numInputRows % expectedMatches);
+        SHARED numInputRows := config.simpleRecordCount DIV (expectedMatches * scale);
+        // Each row in the input will normally match expectedMatches rows.  However there may be some rows that do not have the full set of matches in the rhs
+        // => calculate the number of matches in two parts
+        SHARED expected(unsigned numRows) := (numRows DIV expectedMatches) * expectedMatches * expectedMatches + (numRows % expectedMatches) * (numRows % expectedMatches);
+        EXPORT numExpected := expected(numInputRows);
         
         //Add a hash on each side to ensure the input dataset isn't sorted by the id, hopefully won't introduce false positives!
         SHARED testHash(dsLeft l, dsRight r) := HASH64((l.id1-1) DIV expectedMatches) = HASH64((r.id1-1) DIV expectedMatches);
@@ -25,7 +28,7 @@ EXPORT tests := MODULE
         EXPORT joinOrderedInputsNormal := JOIN(dsLeft, dsRight, testOrdered(LEFT, RIGHT), STREAMED); // inputs happen to be ordered
         EXPORT joinUnordered := JOIN(dsLeft, dsRight, test(LEFT, RIGHT), UNORDERED, STREAMED);
         EXPORT joinParallel := JOIN(dsLeft, dsRight, test(LEFT, RIGHT), HINT(parallel_match), STREAMED);
-        EXPORT joinLookup := JOIN(dsLeft, dsRight, test(LEFT, RIGHT), MANY LOOKUP);
+        EXPORT joinLookup := JOIN(dsLeft, dsRight, test(LEFT, RIGHT), MANY LOOKUP); // LOOKUP join transfers all records onto one node, so size needs to be scaled by cluster size
         EXPORT joinHash := JOIN(dsLeft, dsRight, test(LEFT, RIGHT), HASH);
         EXPORT joinSmart := JOIN(dsLeft, dsRight, test(LEFT, RIGHT), SMART);
 
