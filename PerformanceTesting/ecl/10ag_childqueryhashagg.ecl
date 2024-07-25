@@ -32,7 +32,7 @@ Layout := RECORD
 END;
 
 DUP_UIDS := 4;
-Groups_Per_Slave := 12500;
+Groups_Per_Slave := 125000;
 Recs_Per_Slave := Groups_Per_Slave * DUP_UIDS;
 Layout BuildData(UNSIGNED c) := TRANSFORM
   SELF.UID := (c-1) DIV DUP_UIDS;

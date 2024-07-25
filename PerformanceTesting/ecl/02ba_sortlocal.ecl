@@ -6,6 +6,7 @@
 //version algo='parmergesort'
 //version algo='heapsort'
 //version algo='tbbstableqsort',nohthor
+//version algo='taskquicksort'
 
 import ^ as root;
 algo := #IFDEFINED(root.algo, 'parmergesort');

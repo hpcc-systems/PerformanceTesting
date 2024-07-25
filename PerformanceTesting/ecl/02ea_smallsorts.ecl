@@ -9,7 +9,7 @@
 //version algo='heapsort',nothor
 
 import ^ as root;
-algo := #IFDEFINED(root.algo, 'quicksort');
+algo := #IFDEFINED(root.algo, 'parquicksort');
  
 idRecord := RECORD
     UNSIGNED id;
