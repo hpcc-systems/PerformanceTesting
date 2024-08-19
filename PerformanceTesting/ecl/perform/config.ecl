@@ -12,4 +12,10 @@ export config := MODULE
     export recordPerNode := memoryPerSlave DIV (recordAllocSize * 2);  // Aim for enough records to ensure memory is not quite filled.
     export simpleRecordCount := (recordPerNode * numSlaves);  // Aim for enough records to ensure memory is not quite filled.
     export heapFlags := #IFDEFINED(root.hintHeapFlags, 0);
+    export largeRecordCountPerSlave := 100;  // Total serialized memory ~4GB
+    export largeRecordCount := largeRecordCountPerSlave * numSlaves;
+    export largeRecordChildren := 500000;    // Total size approx 40MB per row
+    export variableRecordCount := largeRecordCount * 10000;
+    export variableRecordChildren := largeRecordChildren / 10000;    // Total size approx 4K per row
+
 end;

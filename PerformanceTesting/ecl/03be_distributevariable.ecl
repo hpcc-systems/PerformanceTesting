@@ -8,8 +8,8 @@ import suite.perform.config;
 import suite.perform.format;
 import suite.perform.files;
 
-ds := files.generateSimple();
+ds := DATASET(config.variableRecordCount, format.createParent(COUNTER, config.variableRecordChildren, 0), DISTRIBUTED);
 
 d := distribute(ds, hash32(id3));
 
-output(COUNT(NOFOLD(d)) = config.simpleRecordCount);
+output(COUNT(NOFOLD(d)) = config.variableRecordCount);
