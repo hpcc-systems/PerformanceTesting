@@ -16,6 +16,8 @@ This file contains a list of all the tests within the test suite, and what parti
 | 09.     Global index read
 | 10.     Simple child queries
 | 11.     Smart join testing
+| 12.     Parallel execution
+| 13.     Splitters
 | 80.     Various miscellaneous tests picked up from other places.
 
 ToDo:
@@ -374,9 +376,14 @@ TBD:01h - Limits on index reads [class: indexread]
 | 12bb - inline -> local sort -> parallel output
 
 13 Splitters
-++++++++++++
 | 13aa - unbalanced splitter, large records
 | 13ab - unbalanced splitter, variable records
+| 13ba - unbalanced splitter, pulled balanced
+| 13bb - unbalanced splitter, pulled out of stepped by different numbers
+| 13bc - unbalanced splitter, one arm only pulls a few records.
+| 13bd - unbalanced splitter, alternating one arm ahead of the other
+| 13be - unbalanced splitter, lookahead on rhs
+| 13bf - unbalanced splitter, lookahead on lhs, rhs
 
 80 Miscellaneous
 ++++++++++++++++
