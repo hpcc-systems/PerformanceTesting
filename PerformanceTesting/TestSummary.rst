@@ -81,6 +81,8 @@ These tests create lots of records, and test how different sources work
 | 01bd - write 82b (with spaces) to a disk file, compressed
 | 01be - write csv to a disk file, uncompressed
 | 01bf - write xml to a disk file, uncompressed
+| 01bg - write variable size to disk, compressed
+| 01bh - write large variable size to disk, compressed
 
 01c - Raw disk read speed [class: diskread]
 -------------------------------------------
@@ -91,6 +93,8 @@ These tests create lots of records, and test how different sources work
 | 01cd - read 82b (with spaces) to a disk file, compressed
 | 01ce - read csv to a disk file, uncompressed
 | 01cf - read xml to a disk file, uncompressed
+| 01cg - read variable size from disk, compressed
+| 01ch - read large variable size from disk, compressed
 
 01d - Parallel disk write speed [class: diskread,parallel]
 ----------------------------------------------------------
@@ -153,6 +157,8 @@ TBD:01h - Limits on index reads [class: indexread]
 | 02bi - Sort local already in order
 | 02bj - Sort local already in reverse order
 | 02bk - Sort local and filter every other record (to stress memory manager)
+| 02bl - Sort global variable
+| 02bm - Sort global very large rows
 
 02c - Multiple sorts in parallel [class: sort]
 ----------------------------------------------
@@ -193,7 +199,9 @@ TBD:01h - Limits on index reads [class: indexread]
 | 03ba - Distribute created rows
 | 03bb - Distribute all rows to the same node - no effect.
 | 03bc - Distribute all rows to the next node.
-| 03bc - Distribute all rows to node self+CLUSTERSIZE/2.
+| 03bd - Distribute all rows to node self+CLUSTERSIZE/2.
+| 03be - Distribute variable size rows
+| 03bf - Distribute large variable size rows
 
 03c - Parallel Distribution [class: distribute]
 -----------------------------------------------
@@ -365,6 +373,10 @@ TBD:01h - Limits on index reads [class: indexread]
 | 12ba - inline -> local sort -> count  [ needs more work ]
 | 12bb - inline -> local sort -> parallel output
 
+13 Splitters
+++++++++++++
+| 13aa - unbalanced splitter, large records
+| 13ab - unbalanced splitter, variable records
 
 80 Miscellaneous
 ++++++++++++++++
