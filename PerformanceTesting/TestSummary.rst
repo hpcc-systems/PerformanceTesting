@@ -376,6 +376,7 @@ TBD:01h - Limits on index reads [class: indexread]
 | 12bb - inline -> local sort -> parallel output
 
 13 Splitters
+++++++++++++
 | 13aa - unbalanced splitter, large records
 | 13ab - unbalanced splitter, variable records
 | 13ba - unbalanced splitter, pulled balanced
@@ -384,6 +385,13 @@ TBD:01h - Limits on index reads [class: indexread]
 | 13bd - unbalanced splitter, alternating one arm ahead of the other
 | 13be - unbalanced splitter, lookahead on rhs
 | 13bf - unbalanced splitter, lookahead on lhs, rhs
+
+15 SOAPCALL
++++++++++++
+| 15aa - Soapcall large number of trivial soapcalls
+| 15ab - Soapcall large number of soapcalls, each of which performs an index lookup
+| 15ba - Parallel Soapcall large number of trivial soapcalls
+| 15bb - Parallel Soapcall large number of soapcalls, each of which performs an index lookup
 
 80 Miscellaneous
 ++++++++++++++++
