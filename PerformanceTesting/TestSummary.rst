@@ -18,6 +18,7 @@ This file contains a list of all the tests within the test suite, and what parti
 | 11.     Smart join testing
 | 12.     Parallel execution
 | 13.     Splitters
+| 14.     Concat/Funnel
 | 15.     SOAPCALL
 | 80.     Various miscellaneous tests picked up from other places.
 
@@ -387,6 +388,13 @@ TBD:01h - Limits on index reads [class: indexread]
 | 13be - unbalanced splitter, lookahead on rhs
 | 13bf - unbalanced splitter, lookahead on lhs, rhs
 | 13ca - balanced splitted
+
+14 Concat/Funnel
+++++++++++++++++
+| 14aa - Ordered concat/funnel, 2 inputs
+| 14ab - Ordered concat/funnel, 8 inputs
+| 14ba - Unordered concat/funnel, 2 inputs
+| 14bb - Unordered concat/funnel, 8 inputs
 
 15 SOAPCALL
 +++++++++++
