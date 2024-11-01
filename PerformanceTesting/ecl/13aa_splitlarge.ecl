@@ -1,6 +1,9 @@
 //class=memory
 //class=sort
 
+//nohthor - hthor does not have splitters
+//noroxie - likely to run out of memory because of the very large records
+
 import $ as suite;
 import suite.perform.config;
 import suite.perform.format;
