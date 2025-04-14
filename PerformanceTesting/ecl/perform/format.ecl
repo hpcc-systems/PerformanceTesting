@@ -27,7 +27,7 @@ export format := MODULE
         id2 := HASH64(id);
         id3 := HASH64(id2);
         id4 := HASH64(id3);
-        RETURN mkSimple(id, 0, id2, 0);//id2, id3, id4);
+        RETURN mkSimple(id, id2, id3, id4);
     END;
 
     export paddedRec createPadded(unsigned8 id) := TRANSFORM
