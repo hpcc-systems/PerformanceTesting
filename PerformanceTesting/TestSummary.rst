@@ -387,7 +387,7 @@ TBD:01h - Limits on index reads [class: indexread]
 | 13bd - unbalanced splitter, alternating one arm ahead of the other
 | 13be - unbalanced splitter, lookahead on rhs
 | 13bf - unbalanced splitter, lookahead on lhs, rhs
-| 13ca - balanced splitted
+| 13ca - balanced splitter
 
 14 Concat/Funnel
 ++++++++++++++++
