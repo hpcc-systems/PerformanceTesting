@@ -1,7 +1,7 @@
 //class=index
 //class=indexwrite
 
-#onwarning (10120, ignore); // Do not complain about building a single part key with lots of elements.
+#onwarning (5820, ignore); // Do not complain about building a single part key with lots of elements.
 
 import $ as suite;
 import suite.perform.config;
