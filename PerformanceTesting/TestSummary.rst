@@ -20,6 +20,7 @@ This file contains a list of all the tests within the test suite, and what parti
 | 13.     Splitters
 | 14.     Concat/Funnel
 | 15.     SOAPCALL
+| 16.     Superfile tests
 | 80.     Various miscellaneous tests picked up from other places.
 
 ToDo:
