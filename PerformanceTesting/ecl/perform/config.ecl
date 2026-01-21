@@ -15,6 +15,7 @@ export config := MODULE
     export largeRecordCountPerSlave := 100;  // Total serialized memory ~4GB
     export largeRecordCount := largeRecordCountPerSlave * numSlaves;
     export largeRecordChildren := 500000;    // Total size approx 40MB per row
+    export vlargeRecordCount := 100 * numSlaves;
     export variableRecordCount := largeRecordCount * 10000;
     export variableRecordChildren := largeRecordChildren / 10000;    // Total size approx 4K per row
 
