@@ -20,6 +20,7 @@
 //version hintNumStrands=6,hintBlockSize=512,hintWriteWork=64,hintReadWork=0,hintIsOrdered=true
 //version hintNumStrands=6,hintBlockSize=512,hintWriteWork=64,hintReadWork=0,hintIsOrdered=false
 
+#onwarning (3118, ignore);
 
 import ^ as root;
 import $ as suite;
@@ -28,8 +29,8 @@ import suite.perform.files;
 
 hintNumStrands := #IFDEFINED(root.hintNumStrands, 8);
 hintBlockSize := #IFDEFINED(root.hintBlockSize, 1024);
-hintIsOrdered := #IFDEFINED(root.hintIsOrdered, false);
-writeWork := #IFDEFINED(root.hintWriteWork, 4);
+hintIsOrdered := #IFDEFINED(root.hintIsOrdered, true);
+writeWork := #IFDEFINED(root.hintWriteWork, 64);
 readWork := #IFDEFINED(root.hintReadWork, 0);
 
 numRecords := 200000000;
@@ -50,4 +51,4 @@ ds  := DATASET(numRecords, createSimple(COUNTER), LOCAL, PARALLEL(hintNumStrands
 readDs := NOFOLD(ds)(performWork(id, readWork) * NOFOLD(0) = 0);
 cnt := COUNT(NOFOLD(readDs));
 
-OUTPUT(cnt - numRecords * CLUSTERSIZE = 0);
+OUTPUT(cnt - numRecords * CLUSTERSIZE);

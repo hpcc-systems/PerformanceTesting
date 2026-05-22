@@ -21,6 +21,7 @@ This file contains a list of all the tests within the test suite, and what parti
 | 14.     Concat/Funnel
 | 15.     SOAPCALL
 | 16.     Superfile tests
+| 61.     Examples that match real-world common problems
 | 80.     Various miscellaneous tests picked up from other places.
 
 ToDo:
@@ -406,6 +407,14 @@ TBD:01h - Limits on index reads [class: indexread]
 | 15ab - Soapcall large number of soapcalls, each of which performs an index lookup
 | 15ba - Parallel Soapcall large number of trivial soapcalls
 | 15bb - Parallel Soapcall large number of soapcalls, each of which performs an index lookup
+
+Combinations:
++++++++++++++
+| 61aa - code for implementing transitive closure
+| 61ab - code for implementing transitive closure with following distribute
+| 61ac - code for implementing transitive closure with hash,many
+| 61ad - optimized code - splitting the self join for implementing transitive closure
+| 61ae - code for implementing transitive closure with local join
 
 80 Miscellaneous
 ++++++++++++++++
