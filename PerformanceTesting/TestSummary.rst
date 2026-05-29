@@ -415,6 +415,12 @@ Combinations:
 | 61ac - code for implementing transitive closure with hash,many
 | 61ad - optimized code - splitting the self join for implementing transitive closure
 | 61ae - code for implementing transitive closure with local join
+| 62aa - KEL style child query with inline append and sort
+| 62ab - KEL style child query with activity append and sort
+| 62ac - KEL style child query with activity append and sort, with grouped dedup
+| 62ad - KEL style child query with inline append and no sort
+| 62ae - KEL style child query with activity append and group (no sort)
+| 62af - KEL style child query with inline append and group (no sort)
 
 80 Miscellaneous
 ++++++++++++++++
