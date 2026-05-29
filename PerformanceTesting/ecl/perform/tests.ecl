@@ -37,7 +37,7 @@ EXPORT tests := MODULE
         EXPORT joinParallelWork(unsigned work) := JOIN(dsLeft, dsRight, test(LEFT, RIGHT), TRANSFORM({unsigned id}, SELF.id := performWork(LEFT.id1 + RIGHT.id1, work)), HINT(parallel_match), STREAMED);
 
         EXPORT joinLocalNormal := JOIN(dsLeft, dsRight, test(LEFT, RIGHT), STREAMED, LOCAL);
-        EXPORT joinLocalUnordered := JOIN(dsLeft, dsRight, test(LEFT, RIGHT), STREAMED, UNORDERED, LOCAL,HINT(newJoinHelper(true)));
+        EXPORT joinLocalUnordered := JOIN(dsLeft, dsRight, test(LEFT, RIGHT), STREAMED, UNORDERED, LOCAL,HINT(newJoinHelper(true)),HINT(max_cores(2)));
         EXPORT joinLocalParallel := JOIN(dsLeft, dsRight, test(LEFT, RIGHT), HINT(parallel_match), STREAMED, LOCAL);
         EXPORT joinLocalLookup := JOIN(dsLeft, dsRight, test(LEFT, RIGHT), MANY LOOKUP, LOCAL);
         EXPORT joinLocalHash := JOIN(dsLeft, dsRight, test(LEFT, RIGHT), HASH, LOCAL);
