@@ -408,6 +408,13 @@ TBD:01h - Limits on index reads [class: indexread]
 | 15ba - Parallel Soapcall large number of trivial soapcalls
 | 15bb - Parallel Soapcall large number of soapcalls, each of which performs an index lookup
 
+16 Superfiles
+++++++++++++++
+| 16aa - Create nested superfiles and read all records
+| 16ab - Create a superfile containing many single-record logical files
+| 16ac - Repeatedly read and count all records in the many-subfile superfile, ordered and interleaved with trivial subgraphs
+| 16ad - Delete the many-subfile superfile and its logical files
+
 Combinations:
 +++++++++++++
 | 61aa - code for implementing transitive closure
